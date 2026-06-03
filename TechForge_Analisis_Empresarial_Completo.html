@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechForge - Desarrollo de Aplicaciones Premium | Análisis Empresarial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #00d4ff;
+            --accent-warm: #ff6b35;
+            --dark: #0f1419;
+            --light: #f0f4f8;
+            --text: #1a1a1a;
+            --text-light: #ffffff;
+            --shadow: 0 10px 40px rgba(30, 60, 114, 0.15);
+            --shadow-lg: 0 20px 60px rgba(30, 60, 114, 0.25);
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --danger: #ff4444;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER & NAV ===== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), #00b4d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 70%;
+        }
+
+        .nav-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .nav-container::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-container::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 0.5rem 0.8rem;
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+        }
+
+        nav a:hover {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--accent);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent), #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #00b4d4);
+            color: var(--dark);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== SECTION GENERAL ===== */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-title .gradient {
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* ===== CARRUSEL ===== */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+            animation: fadeInRight 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .carousel {
+            display: flex;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            transition: opacity 0.5s ease;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide:not(.active) {
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .carousel-slide-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .carousel-slide-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .carousel-slide-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent);
+            width: 30px;
+            border-radius: 10px;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow.prev {
+            left: 20px;
+        }
+
+        .carousel-arrow.next {
+            right: 20px;
+        }
+
+        /* ===== CARDS ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* ===== TABLAS ===== */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table thead {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        table th {
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tbody tr:hover {
+            background: #f5f5f5;
+            transition: background 0.2s ease;
+        }
+
+        table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .badge-success {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .badge-warning {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+        }
+
+        .badge-danger {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+        }
+
+        /* ===== GRÁFICOS ===== */
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .chart-box h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .chart-box canvas {
+            max-height: 300px;
+        }
+
+        /* ===== STATS ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--accent);
+            animation: fadeInUp 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .stat-description {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== SECCIÓN DE RED DIAGRAM ===== */
+        .network-diagram {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+            overflow-x: auto;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .diagram-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--primary);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* ===== SECCIÓN SERVICIOS ===== */
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .servicio-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .servicio-card:nth-child(1) { animation-delay: 0.1s; }
+        .servicio-card:nth-child(2) { animation-delay: 0.2s; }
+        .servicio-card:nth-child(3) { animation-delay: 0.3s; }
+        .servicio-card:nth-child(4) { animation-delay: 0.4s; }
+        .servicio-card:nth-child(5) { animation-delay: 0.5s; }
+        .servicio-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .servicio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .servicio-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .servicio-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .servicio-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* ===== FORMULARIO ===== */
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .form-submit {
+            background: linear-gradient(135deg, var(--accent), #00b4d4);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        /* ===== ACCORDION ===== */
+        .accordion {
+            margin-bottom: 3rem;
+        }
+
+        .accordion-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.05), rgba(42, 82, 152, 0.05));
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.1), rgba(42, 82, 152, 0.1));
+        }
+
+        .accordion-header.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px;
+            padding: 1.5rem;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .accordion-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: var(--text-light);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), #00b4d4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .carousel-container {
+                height: 250px;
+            }
+
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .nav-container {
+                gap: 0.3rem;
+                max-width: 100%;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">⚡ TechForge</div>
+            <div class="nav-container">
+                <nav>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#servicios">Servicios</a>
+                    <a href="#ubicacion">Ubicación</a>
+                    <a href="#personal">Personal</a>
+                    <a href="#red">Red</a>
+                    <a href="#financiero">Financiero</a>
+                    <a href="#legal">Legal</a>
+                    <a href="#tecnico">Técnico</a>
+                    <a href="#roi">ROI</a>
+                    <a href="#contacto">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Análisis Empresarial Integral<br><span class="gradient">TechForge 2024</span></h1>
+            <p>Solución completa de desarrollo de aplicaciones con análisis financiero, infraestructura, personal y proyecciones de rentabilidad.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('servicios')">Ver Análisis</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('contacto')">Contactar</button>
+            </div>
+            <div class="carousel-container" style="margin-top: 3rem;">
+                <div class="carousel">
+                    <div class="carousel-slide active carousel-slide-1">
+                        📱 Desarrollo Web & Mobile
+                    </div>
+                    <div class="carousel-slide carousel-slide-2">
+                        💼 Soluciones Empresariales
+                    </div>
+                    <div class="carousel-slide carousel-slide-3">
+                        🚀 Transformación Digital
+                    </div>
+                    <div class="carousel-slide carousel-slide-4">
+                        💰 ROI: 24-28 Meses
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(3)"></span>
+                </div>
+                <button class="carousel-arrow prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-arrow next" onclick="changeSlide(1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUMEN EJECUTIVO -->
+    <section id="servicios">
+        <div class="section-header">
+            <h2 class="section-title">Resumen <span class="gradient">Ejecutivo</span></h2>
+            <p class="section-subtitle">Visión general del proyecto empresarial</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">$1.66M</div>
+                <div class="stat-label">Inversión Inicial</div>
+                <div class="stat-description">Equipamiento, infraestructura y capital de trabajo</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">13</div>
+                <div class="stat-label">Empleados Iniciales</div>
+                <div class="stat-description">Equipo multidisciplinario y especializado</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">24-28M</div>
+                <div class="stat-label">Payback Period</div>
+                <div class="stat-description">Recuperación completa de inversión</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">$1.53M</div>
+                <div class="stat-label">Ganancia Año 2</div>
+                <div class="stat-description">25.6% margen operacional</div>
+            </div>
+        </div>
+
+        <div class="cards-grid" style="margin-top: 3rem;">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Objetivo</h3>
+                <p>Empresa de desarrollo integral de aplicaciones web, móviles y empresariales con operaciones de clase mundial.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Modelo</h3>
+                <p>Proyectos a medida (55%), Consultoría (20%), Productos SaaS (15%), Soporte (10%).</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎓</div>
+                <h3>Clientes Meta</h3>
+                <p>Startups (40%), PYMES (35%), Medianas empresas (20%), Corporativos (5%).</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💪</div>
+                <h3>Fortalezas</h3>
+                <p>Equipo técnico calificado, metodología ágil, tecnología moderna, soporte 24/7.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚠️</div>
+                <h3>Riesgos</h3>
+                <p>Competencia alta, retención de talento, demanda inicial baja, cambios tecnológicos rápidos.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">✅</div>
+                <h3>Mitigation</h3>
+                <p>Diferenciación por calidad, cultura fuerte, training continuo, diversificación de servicios.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+        <div class="section-header">
+            <h2 class="section-title">Servicios <span class="gradient">Principales</span></h2>
+            <p class="section-subtitle">Soluciones integrales de desarrollo tecnológico</p>
+        </div>
+
+        <div class="servicios-grid">
+            <div class="servicio-card">
+                <div class="servicio-icon">📱</div>
+                <h3>Aplicaciones Móviles</h3>
+                <p>Desarrollo nativo (iOS/Android) y multiplataforma (React Native) con tecnologías de vanguardia.</p>
+            </div>
+            <div class="servicio-card">
+                <div class="servicio-icon">🌐</div>
+                <h3>Plataformas Web</h3>
+                <p>Sitios web escalables y aplicaciones web usando React, Vue.js con diseño responsive.</p>
+            </div>
+            <div class="servicio-card">
+                <div class="servicio-icon">🏢</div>
+                <h3>Software Empresarial</h3>
+                <p>Sistemas ERP, CRM y soluciones personalizadas para optimizar procesos empresariales.</p>
+            </div>
+            <div class="servicio-card">
+                <div class="servicio-icon">🎨</div>
+                <h3>Diseño UX/UI</h3>
+                <p>Interfaces modernas y atractivas en Figma con enfoque en experiencia de usuario.</p>
+            </div>
+            <div class="servicio-card">
+                <div class="servicio-icon">☁️</div>
+                <h3>DevOps & Cloud</h3>
+                <p>Infraestructura en AWS, GCP y Azure con CI/CD, Docker, Kubernetes y monitoreo.</p>
+            </div>
+            <div class="servicio-card">
+                <div class="servicio-icon">🔒</div>
+                <h3>Consultoría Técnica</h3>
+                <p>Auditorías de seguridad, optimización de código y estrategia tecnológica empresarial.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UBICACIÓN Y OFICINA -->
+    <section id="ubicacion">
+        <div class="section-header">
+            <h2 class="section-title">Ubicación & <span class="gradient">Infraestructura</span></h2>
+            <p class="section-subtitle">Oficina profesional en zona empresarial de CDMX</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📍</div>
+                <h3>Ubicación</h3>
+                <p><strong>Av. Paseo de la Reforma 505</strong><br>Cuauhtémoc, CDMX 06500<br>Zona: Polanco/Santa Fe</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📐</div>
+                <h3>Tamaño</h3>
+                <p><strong>120-150 m²</strong><br>Espacio optimizado para 15 personas<br>Open space + salas reuniones</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <h3>Renta Mensual</h3>
+                <p><strong>$12,000 MXN</strong><br>80-100 USD/m²<br>Incluye servicios básicos</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Servicios</h3>
+                <p><strong>$8,700 MXN/mes</strong><br>Internet, telefonía, seguros<br>Electricidad y agua incluida</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Distribución de Espacios</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h4>Open Space (70 m²)</h4>
+                    <p>Zona abierta para 15 desarrolladores con escritorios ergonómicos y doble monitor.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h4>Salas Reuniones (20 m²)</h4>
+                    <p>2 salas con equipamiento audiovisual para reuniones con clientes y equipo.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🖥️</div>
+                    <h4>Sala Servidores (12 m²)</h4>
+                    <p>Cuarto climatizado con infraestructura de red y equipamiento crítico.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">☕</div>
+                    <h4>Áreas Comunes (25 m²)</h4>
+                    <p>Cocina, descanso, baños y circulaciones para confort del equipo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RED E INFRAESTRUCTURA -->
+    <section id="red">
+        <div class="section-header">
+            <h2 class="section-title">Arquitectura de <span class="gradient">Red</span></h2>
+            <p class="section-subtitle">Infraestructura de telecomunicaciones empresarial</p>
+        </div>
+
+        <div class="network-diagram">
+            <pre class="diagram-text">
+                            [INTERNET FIBRA ÓPTICA]
+                            300 Mbps Simétricos
+                                   │
+                        ┌────────▼────────┐
+                        │  MODEM CISCO    │ $14,400
+                        │    EPC3928AD    │
+                        └────────┬────────┘
+                                 │
+                        ┌────────▼────────┐
+                        │ ROUTER MERAKI   │
+                        │   MX84          │
+                        │               │ $36,000
+                        └────────┬────────┘
+                                 │
+                    ┌────────────┼────────────┐
+                    │            │            │
+         ┌──────────▼──┐  ┌──────▼──────┐  ┌─▼────────────┐
+         │ SWITCH 1    │  │ SWITCH 2    │  │ WiFi 6 AP    │
+         │ 48 puertos  │  │ 48 puertos  │  │ (2 units)    │
+         │ PoE         │  │ PoE         │  │              │
+         │ $27,000     │  │ $27,000     │  │ $14,400      │
+         └──────┬──────┘  └──────┬──────┘  └──────────────┘
+                │                │
+       ┌────────┴────────┐   ┌───┴──────────────┐
+       │                 │   │                  │
+   ┌───▼───┐  ┌────┬────┘   │              ┌───▼────┐
+   │15 PCs │  │    │    ┌────▼────┐   ┌────▼──┐ NAS    │
+   │Devs   │  │    │    │Servidor │   │Server │Backup  │
+   │Devs   │  │    │    │Desarrollo   │Prod   │Datos   │
+   │i7/32GB│  │    │    │PostgreSQL   │AWS    │RAID 6  │
+   │$405k  │  │    │    │Node.js   │Redis   │$72k    │
+   │       │  │    │    │$216,000    │$144k   │        │
+   └───────┘  │    │    └────┬────┘   └───┬───┘────────┘
+              │    │         │            │
+              │    └────┬────┴────────────┘
+              │         │
+         ┌────▼───┐ ┌───▼────────┐
+         │UPS 10KVA│ │Patch Panel │
+         │Respaldo │ │Cat6A       │
+         │$63,000  │ │$13,000     │
+         └────────┘ └────────────┘
+
+TOTAL INVERSIÓN RED: $627,600 MXN
+            </pre>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Especificaciones Técnicas</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Especificación</th>
+                            <th>Costo</th>
+                            <th>Justificación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fibra Óptica</strong></td>
+                            <td>300 Mbps Simétrica</td>
+                            <td>$3,500/mes</td>
+                            <td>Uploads rápidos, videoconferencias HD, deployments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Modem</strong></td>
+                            <td>Cisco EPC3928AD DOCSIS 3.1</td>
+                            <td>$14,400</td>
+                            <td>Compatibilidad fibra, gigabit Ethernet</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Router</strong></td>
+                            <td>Cisco Meraki MX84</td>
+                            <td>$36,000</td>
+                            <td>Seguridad avanzada, VPN, QoS, failover</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Switches</strong></td>
+                            <td>2x Cisco Catalyst 2960X</td>
+                            <td>$54,000</td>
+                            <td>PoE para VoIP, redundancia VLAN, uplinks 10G</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WiFi</strong></td>
+                            <td>2x Ubiquiti WiFi 6</td>
+                            <td>$14,400</td>
+                            <td>Cobertura completa, 1.2 Gbps, roaming</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cableado</strong></td>
+                            <td>Cat6A blindado, 500m</td>
+                            <td>$13,000</td>
+                            <td>Futuro-proof, protección EMI, instalación profesional</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERSONAL Y NÓMINA -->
+    <section id="personal">
+        <div class="section-header">
+            <h2 class="section-title">Estructura de <span class="gradient">Personal</span></h2>
+            <p class="section-subtitle">Equipo multidisciplinario especializado</p>
+        </div>
+
+        <div class="stat-box" style="text-align: center; margin-bottom: 3rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+            <div class="stat-number" style="font-size: 3rem;">$251,550</div>
+            <div class="stat-label" style="font-size: 1.1rem;">Nómina Mensual Total</div>
+            <div class="stat-description">13 personas + prestaciones (30%)</div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Puesto</th>
+                        <th>Cantidad</th>
+                        <th>Salario Base</th>
+                        <th>Prestaciones 30%</th>
+                        <th>Costo Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Gerente General</strong></td>
+                        <td>1</td>
+                        <td>$25,000</td>
+                        <td>$7,500</td>
+                        <td><strong>$32,500</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tech Lead</strong></td>
+                        <td>1</td>
+                        <td>$20,000</td>
+                        <td>$6,000</td>
+                        <td><strong>$26,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Desarrollador Senior Full-Stack</strong></td>
+                        <td>2</td>
+                        <td>$18,000 c/u</td>
+                        <td>$10,800</td>
+                        <td><strong>$46,800</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Desarrollador Junior</strong></td>
+                        <td>3</td>
+                        <td>$12,000 c/u</td>
+                        <td>$10,800</td>
+                        <td><strong>$46,800</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Especialista Mobile (iOS/Android)</strong></td>
+                        <td>2</td>
+                        <td>$16,000 c/u</td>
+                        <td>$9,600</td>
+                        <td><strong>$41,600</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diseñador UX/UI</strong></td>
+                        <td>1</td>
+                        <td>$14,000</td>
+                        <td>$4,200</td>
+                        <td><strong>$18,200</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Especialista QA/Testing</strong></td>
+                        <td>1</td>
+                        <td>$12,500</td>
+                        <td>$3,750</td>
+                        <td><strong>$16,250</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Community Manager/Marketing</strong></td>
+                        <td>1</td>
+                        <td>$10,000</td>
+                        <td>$3,000</td>
+                        <td><strong>$13,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Administrativo</strong></td>
+                        <td>1</td>
+                        <td>$8,000</td>
+                        <td>$2,400</td>
+                        <td><strong>$10,400</strong></td>
+                    </tr>
+                    <tr style="background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), transparent); font-weight: bold;">
+                        <td colspan="4">TOTAL NÓMINA MENSUAL:</td>
+                        <td>$251,550</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Plan de Crecimiento</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h4>Año 2</h4>
+                    <p><strong>2 Devs Junior + 1 DevOps</strong><br>Nómina: $330,750 MXN<br>Crecimiento: 31%</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h4>Año 3</h4>
+                    <p><strong>2 Devs Senior + 1 PM</strong><br>Nómina: $430,050 MXN<br>Crecimiento: 71%</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h4>Año 4</h4>
+                    <p><strong>Expansión a 25 personas</strong><br>Nómina: $550,000 MXN<br>2 ubicaciones</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Perfiles Requeridos</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>👨‍💼 Tech Lead - Arquitecto de Software</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Experiencia requerida:</strong> 5+ años desarrollo full-stack, 2+ años liderando equipos</p>
+                        <p><strong>Competencias clave:</strong></p>
+                        <ul style="color: #666; margin-left: 2rem;">
+                            <li>Arquitectura de software (Microservicios, Event-Driven)</li>
+                            <li>Node.js, Express.js, Python, Django</li>
+                            <li>PostgreSQL, Redis, bases de datos avanzadas</li>
+                            <li>Docker, Kubernetes, AWS/GCP</li>
+                            <li>REST APIs, GraphQL</li>
+                            <li>DevOps y CI/CD pipelines</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Responsabilidades:</strong> Diseñar arquitectura proyectos, code reviews, mentoreo equipo, selección tecnologías, optimización performance.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>💻 Desarrollador Senior Full-Stack</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Experiencia requerida:</strong> 5+ años desarrollo profesional</p>
+                        <p><strong>Stack técnico:</strong></p>
+                        <ul style="color: #666; margin-left: 2rem;">
+                            <li>Backend: Node.js, Python, Java</li>
+                            <li>Frontend: React.js, Vue.js, Angular</li>
+                            <li>Bases datos: PostgreSQL, MongoDB, Redis</li>
+                            <li>APIs REST, GraphQL</li>
+                            <li>Git avanzado, Pull Requests, Code Review</li>
+                            <li>Testing: Jest, Selenium, Cypress</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Responsabilidades:</strong> Desarrollar features complejas, optimizar código, documentación técnica, revisión código, investigar bugs críticos.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>📱 Especialista Mobile (iOS/Android)</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Experiencia requerida:</strong> 3+ años desarrollo mobile</p>
+                        <p><strong>Competencias técnicas:</strong></p>
+                        <ul style="color: #666; margin-left: 2rem;">
+                            <li>Swift (iOS) O Kotlin (Android) - experto</li>
+                            <li>React Native (multiplataforma)</li>
+                            <li>Firebase, Push notifications</li>
+                            <li>APIs REST integration</li>
+                            <li>AppStore y PlayStore deployment</li>
+                            <li>UI/UX mobile (Material Design, HIG)</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Responsabilidades:</strong> Apps móviles nativas y cross-platform, integración APIs, testing en dispositivos reales, publicación en tiendas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVERSIÓN Y FINANCIAMIENTO -->
+    <section id="financiero">
+        <div class="section-header">
+            <h2 class="section-title">Análisis <span class="gradient">Financiero</span></h2>
+            <p class="section-subtitle">Inversión, gastos y proyecciones de rentabilidad</p>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Inversión Inicial</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Cantidad</th>
+                            <th>Costo Unitario</th>
+                            <th>Costo Total</th>
+                            <th>% del Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Computadoras de Escritorio</strong></td>
+                            <td>15</td>
+                            <td>$27,000</td>
+                            <td>$405,000</td>
+                            <td>24.4%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Servidores (2x Dell)</strong></td>
+                            <td>2</td>
+                            <td>$216,000</td>
+                            <td>$360,000</td>
+                            <td>21.7%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infraestructura Red</strong></td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>$50,000</td>
+                            <td>3.0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NAS Backup</strong></td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>$72,000</td>
+                            <td>4.3%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>UPS y Seguridad</strong></td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>$63,000</td>
+                            <td>3.8%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobiliario y Decoración</strong></td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>$45,000</td>
+                            <td>2.7%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trámites Legales</strong></td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>$8,000</td>
+                            <td>0.5%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Licencias de Software</strong></td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>$15,000</td>
+                            <td>0.9%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Depósito Renta (3 meses)</strong></td>
+                            <td>1</td>
+                            <td>-</td>
+                            <td>$36,000</td>
+                            <td>2.2%</td>
+                        </tr>
+                        <tr style="background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), transparent); font-weight: bold;">
+                            <td colspan="3">SUBTOTAL ACTIVOS FIJOS</td>
+                            <td>$1,054,000</td>
+                            <td>63.5%</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><strong>Capital de Trabajo (3 meses nómina + gastos)</strong></td>
+                            <td>-</td>
+                            <td>$878,250</td>
+                            <td>52.8%</td>
+                        </tr>
+                        <tr style="background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent); font-weight: bold; font-size: 1.1rem;">
+                            <td colspan="3">INVERSIÓN TOTAL INICIAL</td>
+                            <td>$1,661,050</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Gastos Operacionales Mensuales</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Costo Mensual</th>
+                            <th>Costo Anual</th>
+                            <th>% del Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-weight: bold; background: rgba(255, 170, 0, 0.05);">
+                            <td>NÓMINA Y BENEFICIOS</td>
+                            <td>$251,550</td>
+                            <td>$3,018,600</td>
+                            <td>86.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Renta de Oficina</td>
+                            <td>$12,000</td>
+                            <td>$144,000</td>
+                            <td>3.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Servicios (luz, agua, gas)</td>
+                            <td>$2,500</td>
+                            <td>$30,000</td>
+                            <td>0.7%</td>
+                        </tr>
+                        <tr>
+                            <td>Internet Profesional (300 Mbps)</td>
+                            <td>$3,500</td>
+                            <td>$42,000</td>
+                            <td>1.0%</td>
+                        </tr>
+                        <tr>
+                            <td>Telefonía VoIP</td>
+                            <td>$1,200</td>
+                            <td>$14,400</td>
+                            <td>0.3%</td>
+                        </tr>
+                        <tr>
+                            <td>Seguros (Responsabilidad Civil)</td>
+                            <td>$2,000</td>
+                            <td>$24,000</td>
+                            <td>0.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Licencias de Software</td>
+                            <td>$3,000</td>
+                            <td>$36,000</td>
+                            <td>0.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Hosting y Servidores Cloud</td>
+                            <td>$5,000</td>
+                            <td>$60,000</td>
+                            <td>1.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing y Publicidad</td>
+                            <td>$8,000</td>
+                            <td>$96,000</td>
+                            <td>2.3%</td>
+                        </tr>
+                        <tr>
+                            <td>Gastos Administrativos</td>
+                            <td>$2,000</td>
+                            <td>$24,000</td>
+                            <td>0.6%</td>
+                        </tr>
+                        <tr>
+                            <td>Mantenimiento Infraestructura</td>
+                            <td>$2,000</td>
+                            <td>$24,000</td>
+                            <td>0.6%</td>
+                        </tr>
+                        <tr style="background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), transparent); font-weight: bold;">
+                            <td>TOTAL GASTOS MENSUALES</td>
+                            <td>$292,750</td>
+                            <td>$3,513,000</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Opciones de Financiamiento</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">💳</div>
+                    <h4>Opción 1: RECOMENDADA</h4>
+                    <ul style="color: #666; margin-left: 1rem; text-align: left;">
+                        <li>✓ Crédito bancario: $1,000,000 MXN</li>
+                        <li>✓ 48 meses plazo</li>
+                        <li>✓ 10% anual</li>
+                        <li>✓ Cuota: $25,350/mes</li>
+                        <li>✓ Bancos: Nacional Financiera, BBVA, Santander</li>
+                        <li>✓ Capital propio: $661,050</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏦</div>
+                    <h4>Opción 2: Múltiples Créditos</h4>
+                    <ul style="color: #666; margin-left: 1rem; text-align: left;">
+                        <li>✓ Crédito 1: $600,000</li>
+                        <li>✓ Crédito 2: $400,000</li>
+                        <li>✓ Capital propio: $661,050</li>
+                        <li>✓ Distribuye riesgo</li>
+                        <li>✓ Diferentes bancos</li>
+                        <li>✓ Mejores tasas competitivas</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h4>Opción 3: Inversionistas</h4>
+                    <ul style="color: #666; margin-left: 1rem; text-align: left;">
+                        <li>✓ Inversionistas ángeles</li>
+                        <li>✓ $1,200,000 capital riesgo</li>
+                        <li>✓ 40-50% equity</li>
+                        <li>✓ Para crecimiento acelerado</li>
+                        <li>✓ Mentoreo + Networking</li>
+                        <li>✓ Sin deuda financiera</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECCIONES FINANCIERAS -->
+    <section id="roi">
+        <div class="section-header">
+            <h2 class="section-title">Proyecciones <span class="gradient">Financieras</span></h2>
+            <p class="section-subtitle">Ingresos, gastos y punto de equilibrio</p>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-box">
+                <h3>Ingresos Proyectados (3 años)</h3>
+                <canvas id="chartIngresos"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Gastos vs Ingresos (Año 1)</h3>
+                <canvas id="chartComparacion"></canvas>
+            </div>
+        </div>
+
+        <div class="table-responsive" style="margin-bottom: 3rem;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Período</th>
+                        <th>Ingresos</th>
+                        <th>Gastos</th>
+                        <th>Resultado</th>
+                        <th>Acumulado</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: rgba(255, 68, 68, 0.05);">
+                        <td><strong>AÑO 1</strong></td>
+                        <td>$2,430,000</td>
+                        <td>$3,513,000</td>
+                        <td style="color: #ff4444;">-$1,083,000</td>
+                        <td style="color: #ff4444;">-$1,083,000</td>
+                        <td><span class="badge badge-danger">PÉRDIDA</span></td>
+                    </tr>
+                    <tr style="background: rgba(0, 255, 136, 0.05);">
+                        <td><strong>AÑO 2</strong></td>
+                        <td>$6,000,000</td>
+                        <td>$4,465,200</td>
+                        <td style="color: #00ff88;">+$1,534,800</td>
+                        <td style="color: #00ff88;">+$451,800</td>
+                        <td><span class="badge badge-success">GANANCIA</span></td>
+                    </tr>
+                    <tr style="background: rgba(0, 255, 136, 0.05);">
+                        <td><strong>AÑO 3</strong></td>
+                        <td>$8,500,000</td>
+                        <td>$5,200,000</td>
+                        <td style="color: #00ff88;">+$3,300,000</td>
+                        <td style="color: #00ff88;">+$3,751,800</td>
+                        <td><span class="badge badge-success">GANANCIA</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">14-16</div>
+                <div class="stat-label">Mes de Break-Even</div>
+                <div class="stat-description">Punto de equilibrio operacional</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">24-28M</div>
+                <div class="stat-label">Recuperación Inversión</div>
+                <div class="stat-description">Payback Period completo</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">25.6%</div>
+                <div class="stat-label">Margen Año 2</div>
+                <div class="stat-description">Ganancia sobre ingresos</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">38.8%</div>
+                <div class="stat-label">Margen Año 3</div>
+                <div class="stat-description">Márgenes optimizados</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Detalle Ingresos Año 1</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Período</th>
+                            <th>Descripción</th>
+                            <th>Proyección</th>
+                            <th>Ingresos Mensuales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mes 1-2</strong></td>
+                            <td>Setup, marketing inicial</td>
+                            <td>1-2 leads</td>
+                            <td>$0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mes 3-4</strong></td>
+                            <td>Primeros proyectos pequeños</td>
+                            <td>1-2 proyectos</td>
+                            <td>$90,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mes 5-6</strong></td>
+                            <td>Proyectos medianos, referencias</td>
+                            <td>3 proyectos</td>
+                            <td>$180,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mes 7-9</strong></td>
+                            <td>Portfolio creciente, reputación</td>
+                            <td>4-5 proyectos</td>
+                            <td>$300,000</td>
+                        </tr>
+                        <tr style="background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), transparent); font-weight: bold;">
+                            <td colspan="2">Mes 10-12: Demanda creciente, 5-6 proyectos simultáneos</td>
+                            <td>-</td>
+                            <td>$400,000</td>
+                        </tr>
+                        <tr style="background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent); font-weight: bold;">
+                            <td colspan="2">TOTAL AÑO 1</td>
+                            <td>-</td>
+                            <td>$2,430,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ASPECTOS LEGALES -->
+    <section id="legal">
+        <div class="section-header">
+            <h2 class="section-title">Marco <span class="gradient">Legal</span></h2>
+            <p class="section-subtitle">Obligaciones fiscales, laborales y legales</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">⚖️</div>
+                <h3>Estructura Jurídica</h3>
+                <p><strong>S.A. de C.V.</strong> (Sociedad Anónima de Capital Variable)</p>
+                <p style="color: #666; font-size: 0.85rem; margin-top: 1rem;">Responsabilidad limitada, atrae inversionistas, estructura profesional.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Trámites de Constitución</h3>
+                <p>RFC • IMSS • INFONAVIT<br>Registro Público • Licencia Local</p>
+                <p style="color: #666; font-size: 0.85rem; margin-top: 1rem;">Costo: $8,000-11,000 MXN<br>Tiempo: 2 semanas</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💰</div>
+                <h3>Obligaciones Fiscales</h3>
+                <p><strong>ISR:</strong> 30% anual<br><strong>IVA:</strong> 16%</p>
+                <p style="color: #666; font-size: 0.85rem; margin-top: 1rem;">Declaraciones mensuales y anuales ante SAT</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Aportaciones a la Seguridad Social</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Aportación Patronal</th>
+                            <th>Sobre Salario</th>
+                            <th>Cobertura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>IMSS</strong></td>
+                            <td>$42,763/mes</td>
+                            <td>17% del salario</td>
+                            <td>Seguro médico, incapacidad, invalidez</td>
+                        </tr>
+                        <tr>
+                            <td><strong>INFONAVIT</strong></td>
+                            <td>$12,577/mes</td>
+                            <td>5% del salario</td>
+                            <td>Crédito para vivienda de trabajadores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FONACOT</strong></td>
+                            <td>$1,355/mes</td>
+                            <td>1% del salario</td>
+                            <td>Fondo de confianza para trabajadores</td>
+                        </tr>
+                        <tr style="background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), transparent); font-weight: bold;">
+                            <td colspan="4">TOTAL APORTACIONES: $56,695/mes (22.6% del salario base)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Documentos y Seguros Necesarios</h3>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>📄 Contratos y Documentos Legales</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ul style="color: #666; margin-left: 2rem; line-height: 2;">
+                            <li><strong>Contrato de Prestación de Servicios:</strong> Alcance, timing, pagos, confidencialidad</li>
+                            <li><strong>Contrato de Trabajo:</strong> Puesto, salario, horario, no-competencia</li>
+                            <li><strong>NDA (Non-Disclosure Agreement):</strong> Protege secretos comerciales</li>
+                            <li><strong>Términos de Servicio:</strong> Para servicios en línea/SaaS</li>
+                            <li><strong>Política de Privacidad:</strong> Cumplimiento GDPR/LGPD</li>
+                        </ul>
+                        <p style="margin-top: 1.5rem; color: #666;"><strong>Costo:</strong> $3,000-5,000 MXN (redacción inicial)</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🛡️ Seguros Recomendados</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <table style="width: 100%; color: #666;">
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td><strong>Responsabilidad Civil Profesional</strong></td>
+                                <td>$2,000/año</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td><strong>Robo e Incendio (Equipos)</strong></td>
+                                <td>$3,000/año</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td><strong>Ciberataques (Cyber Insurance)</strong></td>
+                                <td>$2,000/año</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td><strong>Responsabilidad de Empleadores</strong></td>
+                                <td>$1,500/año</td>
+                            </tr>
+                            <tr style="background: rgba(0, 212, 255, 0.1); font-weight: bold;">
+                                <td><strong>TOTAL ANUAL</strong></td>
+                                <td><strong>$8,500/año</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESPECIFICACIONES TÉCNICAS -->
+    <section id="tecnico">
+        <div class="section-header">
+            <h2 class="section-title">Especificaciones <span class="gradient">Técnicas</span></h2>
+            <p class="section-subtitle">Equipamiento, software y stack tecnológico</p>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Computadoras de Desarrollo</h3>
+            <div class="card" style="animation: fadeInUp 0.6s ease-out;">
+                <table style="width: 100%; background: transparent;">
+                    <tr style="border-bottom: 2px solid #e0e0e0;">
+                        <td style="width: 30%;"><strong>Procesador</strong></td>
+                        <td>Intel Core i7-13700K o AMD Ryzen 7 7700X</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td><strong>Memoria RAM</strong></td>
+                        <td>32 GB DDR5 (crucial para VMs y compiladores)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td><strong>Almacenamiento</strong></td>
+                        <td>1 TB SSD NVMe (3,500+ MB/s)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td><strong>Pantallas</strong></td>
+                        <td>Dual 27" QHD (2560x1440) 144Hz</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td><strong>GPU</strong></td>
+                        <td>RTX 3060 Ti (renderizado, WebGL)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td><strong>Costo Unitario</strong></td>
+                        <td style="color: var(--accent); font-weight: bold;">$27,000-32,000 MXN</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total 15 unidades</strong></td>
+                        <td style="color: var(--accent); font-weight: bold;">$405,000 MXN</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Stack Tecnológico Recomendado</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🔙</div>
+                    <h4>Backend</h4>
+                    <ul style="color: #666; margin-left: 1rem; font-size: 0.9rem;">
+                        <li>✓ Node.js / Express</li>
+                        <li>✓ Python / Django</li>
+                        <li>✓ PostgreSQL</li>
+                        <li>✓ Redis</li>
+                        <li>✓ GraphQL</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h4>Frontend</h4>
+                    <ul style="color: #666; margin-left: 1rem; font-size: 0.9rem;">
+                        <li>✓ React.js</li>
+                        <li>✓ Vue.js</li>
+                        <li>✓ TypeScript</li>
+                        <li>✓ Tailwind CSS</li>
+                        <li>✓ Next.js</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h4>Mobile</h4>
+                    <ul style="color: #666; margin-left: 1rem; font-size: 0.9rem;">
+                        <li>✓ Swift (iOS)</li>
+                        <li>✓ Kotlin (Android)</li>
+                        <li>✓ React Native</li>
+                        <li>✓ Firebase</li>
+                        <li>✓ Flutter</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h4>DevOps</h4>
+                    <ul style="color: #666; margin-left: 1rem; font-size: 0.9rem;">
+                        <li>✓ Docker</li>
+                        <li>✓ Kubernetes</li>
+                        <li>✓ AWS / GCP / Azure</li>
+                        <li>✓ GitHub Actions</li>
+                        <li>✓ Jenkins</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">✅</div>
+                    <h4>Testing</h4>
+                    <ul style="color: #666; margin-left: 1rem; font-size: 0.9rem;">
+                        <li>✓ Jest</li>
+                        <li>✓ Selenium</li>
+                        <li>✓ Cypress</li>
+                        <li>✓ Pytest</li>
+                        <li>✓ JIRA</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h4>Herramientas</h4>
+                    <ul style="color: #666; margin-left: 1rem; font-size: 0.9rem;">
+                        <li>✓ Git / GitHub</li>
+                        <li>✓ Figma</li>
+                        <li>✓ VS Code</li>
+                        <li>✓ Slack</li>
+                        <li>✓ Notion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Servidores y Almacenamiento</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Especificación</th>
+                            <th>Función</th>
+                            <th>Costo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Servidor Principal</strong></td>
+                            <td>Dell PowerEdge R750 XL<br>56 cores, 256GB RAM, 4TB SSD</td>
+                            <td>Desarrollo, staging, producción</td>
+                            <td>$216,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Servidor Backup</strong></td>
+                            <td>Dell PowerEdge R750<br>24 cores, 128GB RAM, 2TB SSD</td>
+                            <td>Failover, disaster recovery</td>
+                            <td>$144,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NAS Synology</strong></td>
+                            <td>RS3618xs, 36 bahías RAID 6<br>240TB neto</td>
+                            <td>Respaldo automático de datos</td>
+                            <td>$72,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>UPS</strong></td>
+                            <td>APC Smart-UPS SRT 10000XLi<br>Batería litio, 20-30min autonomía</td>
+                            <td>Protección ante fallo eléctrico</td>
+                            <td>$63,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="section-header">
+            <h2 class="section-title">Ponte en <span class="gradient">Contacto</span></h2>
+            <p class="section-subtitle">Solicita información sobre este análisis empresarial</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1000px; margin: 0 auto; align-items: start;">
+            <div style="animation: fadeInUp 0.6s ease-out;">
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem;">Información de Contacto</h3>
+                <div class="card">
+                    <div class="card-icon">📍</div>
+                    <h4>Ubicación</h4>
+                    <p>Av. Paseo de la Reforma 505<br>Cuauhtémoc, CDMX 06500, México</p>
+                </div>
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-icon">📞</div>
+                    <h4>Teléfono</h4>
+                    <p><a href="tel:+525512345678" style="color: var(--accent); text-decoration: none; font-weight: bold;">+55 1234 5678</a></p>
+                </div>
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-icon">✉️</div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:contacto@techforge.mx" style="color: var(--accent); text-decoration: none; font-weight: bold;">contacto@techforge.mx</a></p>
+                </div>
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="card-icon">💬</div>
+                    <h4>WhatsApp</h4>
+                    <p><a href="https://wa.me/525512345678?text=Hola%20TechForge" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: bold;">+55 1234 5678</a></p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Envía tu Mensaje</h3>
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="asunto">Asunto</label>
+                    <input type="text" id="asunto" name="asunto" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" required></textarea>
+                </div>
+                <button type="submit" class="form-submit" onclick="handleSubmit(event)">Enviar Mensaje</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-socials">
+                <a href="#" class="social-icon" title="Facebook">f</a>
+                <a href="#" class="social-icon" title="Twitter">𝕏</a>
+                <a href="#" class="social-icon" title="LinkedIn">in</a>
+                <a href="#" class="social-icon" title="YouTube">yt</a>
+            </div>
+            <div class="footer-text">
+                <p>&copy; 2024 TechForge. Todos los derechos reservados. | Análisis Empresarial | Desarrollo de Aplicaciones Premium</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // CARRUSEL
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let autoSlideInterval;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            slides[n].classList.add('active');
+            dots[n].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+
+        function currentSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+
+        function autoSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(autoSlide, 5000);
+        }
+
+        // ACCORDION
+        function toggleAccordion(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+        }
+
+        // SCROLL ANIMATIONS
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.card, .stat-box, .chart-box, .servicio-card, .accordion-item, .table-responsive').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // SCROLL TO SECTION
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // FORM SUBMIT
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');
+            document.querySelector('.contact-form').reset();
+        }
+
+        // GRÁFICOS
+        function initCharts() {
+            // Gráfico de Ingresos
+            const ctxIngresos = document.getElementById('chartIngresos').getContext('2d');
+            new Chart(ctxIngresos, {
+                type: 'bar',
+                data: {
+                    labels: ['Año 1', 'Año 2', 'Año 3'],
+                    datasets: [{
+                        label: 'Ingresos Proyectados',
+                        data: [2430000, 6000000, 8500000],
+                        backgroundColor: [
+                            'rgba(255, 170, 0, 0.3)',
+                            'rgba(0, 255, 136, 0.3)',
+                            'rgba(0, 255, 136, 0.3)'
+                        ],
+                        borderColor: [
+                            '#ffaa00',
+                            '#00ff88',
+                            '#00ff88'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Comparación
+            const ctxComp = document.getElementById('chartComparacion').getContext('2d');
+            new Chart(ctxComp, {
+                type: 'line',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                    datasets: [
+                        {
+                            label: 'Ingresos Mensuales',
+                            data: [0, 0, 90000, 90000, 180000, 180000, 300000, 300000, 300000, 400000, 400000, 400000],
+                            borderColor: '#00d4ff',
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Gastos Mensuales',
+                            data: [292750, 292750, 292750, 292750, 292750, 292750, 292750, 292750, 292750, 292750, 292750, 292750],
+                            borderColor: '#ff4444',
+                            borderDash: [5, 5],
+                            borderWidth: 2,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000) + 'k';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // INICIALIZAR
+        resetAutoSlide();
+        observeElements();
+        window.addEventListener('load', initCharts);
+    </script>
+
+</body>
+</html>
