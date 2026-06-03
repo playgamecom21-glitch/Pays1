@@ -39,17 +39,17 @@
             overflow-x: hidden;
         }
 
-        /* ===== HEADER & NAV ===== */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 20, 25, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            animation: slideDown 0.6s ease-out;
+        
+                    header {
+                        position: fixed;
+                        top: 0;
+                        width: 100%;
+                        background: rgba(15, 20, 25, 0.98);
+                        backdrop-filter: blur(10px);
+                        z-index: 1000;
+                        padding: 1rem 0;
+                        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                        animation: slideDown 0.6s ease-out;
         }
 
         @keyframes slideDown {
@@ -321,22 +321,6 @@
             height: 100%;
         }
 
-        .carousel-slide-1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .carousel-slide-2 {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .carousel-slide-3 {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .carousel-slide-4 {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
         .carousel-nav {
             position: absolute;
             bottom: 20px;
@@ -595,7 +579,7 @@
             word-wrap: break-word;
         }
 
-        /* ===== SECCIÓN SERVICIOS ===== */
+     
         .servicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -823,7 +807,7 @@
             font-size: 0.9rem;
         }
 
-        /* ===== RESPONSIVE ===== */
+       
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -893,56 +877,81 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header>
         <div class="header-container">
             <div class="logo">⚡ TechForge</div>
             <div class="nav-container">
                 <nav>
-                    <a href="#inicio">Inicio</a>
-                    <a href="#servicios">Servicios</a>
-                    <a href="#ubicacion">Ubicación</a>
-                    <a href="#personal">Personal</a>
-                    <a href="#red">Red</a>
-                    <a href="#financiero">Financiero</a>
-                    <a href="#legal">Legal</a>
-                    <a href="#tecnico">Técnico</a>
-                    <a href="#roi">ROI</a>
-                    <a href="#contacto">Contacto</a>
+                                                <a href="#inicio">Inicio</a>
+                                                <a href="#servicios">Servicios</a>
+                                                <a href="#ubicacion">Ubicación</a>
+                                                <a href="#personal">Personal</a>
+                                                <a href="#red">Red</a>
+                                                <a href="#financiero">Financiero</a>
+                                                <a href="#legal">Legal</a>
+                                                <a href="#tecnico">Técnico</a>
+                                                <a href="#roi">ROI</a>
+                                                <a href="#contacto">Contacto</a>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero" id="inicio">
         <div class="hero-content">
-            <h1>Análisis Empresarial Integral<br><span class="gradient">TechForge 2024</span></h1>
+            <h1>Análisis Empresarial Integral<br><span class="gradient">TechForge </span></h1>
             <p>Solución completa de desarrollo de aplicaciones con análisis financiero, infraestructura, personal y proyecciones de rentabilidad.</p>
             <div class="hero-buttons">
                 <button class="btn btn-primary" onclick="scrollToSection('servicios')">Ver Análisis</button>
                 <button class="btn btn-secondary" onclick="scrollToSection('contacto')">Contactar</button>
             </div>
+            
             <div class="carousel-container" style="margin-top: 3rem;">
                 <div class="carousel">
-                    <div class="carousel-slide active carousel-slide-1">
-                        📱 Desarrollo Web & Mobile
+                    
+                    <div class="carousel-slide active" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                        <div style="text-align: center; padding: 0 20px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 10px;">📱 Desarrollo Web & Mobile</div>
+                            <div style="font-size: 1.2rem; font-weight: normal;">Creamos aplicaciones nativas y plataformas web.</div>
+                        </div>
                     </div>
-                    <div class="carousel-slide carousel-slide-2">
-                        💼 Soluciones Empresariales
+                    
+                    <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                        <div style="text-align: center; padding: 0 20px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 10px;">💼 Soluciones Empresariales</div>
+                            <div style="font-size: 1.2rem; font-weight: normal;">Sistemas ERP, CRM y software a la medida.</div>
+                        </div>
                     </div>
-                    <div class="carousel-slide carousel-slide-3">
-                        🚀 Transformación Digital
+                    
+                    <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                        <div style="text-align: center; padding: 0 20px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 10px;">🚀 Transformación Digital</div>
+                            <div style="font-size: 1.2rem; font-weight: normal;">Cloud, DevOps y metodologías ágiles.</div>
+                        </div>
                     </div>
-                    <div class="carousel-slide carousel-slide-4">
-                        💰 ROI: 24-28 Meses
+
+                    <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                        <div style="text-align: center; padding: 0 20px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 10px;">🔐 Ciberseguridad & Datos</div>
+                            <div style="font-size: 1.2rem; font-weight: normal;">Protegemos tu información crítica y Big Data.</div>
+                        </div>
                     </div>
+                    
+                    <div class="carousel-slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80') center/cover;">
+                        <div style="text-align: center; padding: 0 20px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 10px;">💰 ROI Acelerado</div>
+                            <div style="font-size: 1.2rem; font-weight: normal;">Retorno de inversión proyectado en 24-28 meses.</div>
+                        </div>
+                    </div>
+
                 </div>
+                
                 <div class="carousel-nav">
                     <span class="carousel-dot active" onclick="currentSlide(0)"></span>
                     <span class="carousel-dot" onclick="currentSlide(1)"></span>
                     <span class="carousel-dot" onclick="currentSlide(2)"></span>
                     <span class="carousel-dot" onclick="currentSlide(3)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(4)"></span>
                 </div>
                 <button class="carousel-arrow prev" onclick="changeSlide(-1)">❮</button>
                 <button class="carousel-arrow next" onclick="changeSlide(1)">❯</button>
@@ -950,7 +959,6 @@
         </div>
     </section>
 
-    <!-- RESUMEN EJECUTIVO -->
     <section id="servicios">
         <div class="section-header">
             <h2 class="section-title">Resumen <span class="gradient">Ejecutivo</span></h2>
@@ -1014,7 +1022,6 @@
         </div>
     </section>
 
-    <!-- SERVICIOS -->
     <section id="servicios">
         <div class="section-header">
             <h2 class="section-title">Servicios <span class="gradient">Principales</span></h2>
@@ -1055,7 +1062,6 @@
         </div>
     </section>
 
-    <!-- UBICACIÓN Y OFICINA -->
     <section id="ubicacion">
         <div class="section-header">
             <h2 class="section-title">Ubicación & <span class="gradient">Infraestructura</span></h2>
@@ -1112,7 +1118,6 @@
         </div>
     </section>
 
-    <!-- RED E INFRAESTRUCTURA -->
     <section id="red">
         <div class="section-header">
             <h2 class="section-title">Arquitectura de <span class="gradient">Red</span></h2>
@@ -1123,7 +1128,7 @@
             <pre class="diagram-text">
                             [INTERNET FIBRA ÓPTICA]
                             300 Mbps Simétricos
-                                   │
+                                    │
                         ┌────────▼────────┐
                         │  MODEM CISCO    │ $14,400
                         │    EPC3928AD    │
@@ -1131,8 +1136,8 @@
                                  │
                         ┌────────▼────────┐
                         │ ROUTER MERAKI   │
-                        │   MX84          │
-                        │               │ $36,000
+                        │    MX84         │
+                        │                 │ $36,000
                         └────────┬────────┘
                                  │
                     ┌────────────┼────────────┐
@@ -1222,7 +1227,6 @@ TOTAL INVERSIÓN RED: $627,600 MXN
         </div>
     </section>
 
-    <!-- PERSONAL Y NÓMINA -->
     <section id="personal">
         <div class="section-header">
             <h2 class="section-title">Estructura de <span class="gradient">Personal</span></h2>
@@ -1405,7 +1409,6 @@ TOTAL INVERSIÓN RED: $627,600 MXN
         </div>
     </section>
 
-    <!-- INVERSIÓN Y FINANCIAMIENTO -->
     <section id="financiero">
         <div class="section-header">
             <h2 class="section-title">Análisis <span class="gradient">Financiero</span></h2>
@@ -1643,7 +1646,6 @@ TOTAL INVERSIÓN RED: $627,600 MXN
         </div>
     </section>
 
-    <!-- PROYECCIONES FINANCIERAS -->
     <section id="roi">
         <div class="section-header">
             <h2 class="section-title">Proyecciones <span class="gradient">Financieras</span></h2>
@@ -1778,7 +1780,6 @@ TOTAL INVERSIÓN RED: $627,600 MXN
         </div>
     </section>
 
-    <!-- ASPECTOS LEGALES -->
     <section id="legal">
         <div class="section-header">
             <h2 class="section-title">Marco <span class="gradient">Legal</span></h2>
@@ -1899,7 +1900,6 @@ TOTAL INVERSIÓN RED: $627,600 MXN
         </div>
     </section>
 
-    <!-- ESPECIFICACIONES TÉCNICAS -->
     <section id="tecnico">
         <div class="section-header">
             <h2 class="section-title">Especificaciones <span class="gradient">Técnicas</span></h2>
@@ -2057,7 +2057,6 @@ TOTAL INVERSIÓN RED: $627,600 MXN
         </div>
     </section>
 
-    <!-- CONTACTO -->
     <section id="contacto">
         <div class="section-header">
             <h2 class="section-title">Ponte en <span class="gradient">Contacto</span></h2>
@@ -2070,7 +2069,7 @@ TOTAL INVERSIÓN RED: $627,600 MXN
                 <div class="card">
                     <div class="card-icon">📍</div>
                     <h4>Ubicación</h4>
-                    <p>Av. Paseo de la Reforma 505<br>Cuauhtémoc, CDMX 06500, México</p>
+                    <p> CU<br>Coyoacan, CDMX 06500, México</p>
                 </div>
                 <div class="card" style="margin-top: 1rem;">
                     <div class="card-icon">📞</div>
@@ -2089,30 +2088,7 @@ TOTAL INVERSIÓN RED: $627,600 MXN
                 </div>
             </div>
 
-            <div class="contact-form">
-                <h3>Envía tu Mensaje</h3>
-                <div class="form-group">
-                    <label for="nombre">Nombre Completo</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="asunto">Asunto</label>
-                    <input type="text" id="asunto" name="asunto" required>
-                </div>
-                <div class="form-group">
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" required></textarea>
-                </div>
-                <button type="submit" class="form-submit" onclick="handleSubmit(event)">Enviar Mensaje</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
+            
     <footer>
         <div class="footer-content">
             <div class="footer-socials">
@@ -2122,14 +2098,14 @@ TOTAL INVERSIÓN RED: $627,600 MXN
                 <a href="#" class="social-icon" title="YouTube">yt</a>
             </div>
             <div class="footer-text">
-                <p>&copy; 2024 TechForge. Todos los derechos reservados. | Análisis Empresarial | Desarrollo de Aplicaciones Premium</p>
+                <p>&copy;  TechForge. Todos los derechos reservados a Yisus y sus Pays </p>
             </div>
         </div>
     </footer>
 
     <script>
         // CARRUSEL
-        let currentSlide = 0;
+        let slideIndex = 0; // SOLUCIÓN AL BUG: Cambiamos de currentSlide a slideIndex
         const slides = document.querySelectorAll('.carousel-slide');
         const dots = document.querySelectorAll('.carousel-dot');
         let autoSlideInterval;
@@ -2142,20 +2118,21 @@ TOTAL INVERSIÓN RED: $627,600 MXN
         }
 
         function changeSlide(direction) {
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            showSlide(currentSlide);
+            slideIndex = (slideIndex + direction + slides.length) % slides.length;
+            showSlide(slideIndex);
             resetAutoSlide();
         }
 
+        // Mantenemos la función intacta para que los botones en HTML funcionen
         function currentSlide(n) {
-            currentSlide = n;
-            showSlide(currentSlide);
+            slideIndex = n;
+            showSlide(slideIndex);
             resetAutoSlide();
         }
 
         function autoSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlide(slideIndex);
         }
 
         function resetAutoSlide() {
